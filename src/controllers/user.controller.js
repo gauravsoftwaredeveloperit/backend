@@ -222,10 +222,11 @@ const logoutUser = asyncHandler( async(req,res)=>{
         const incomingRefreshToken = req.Cookies.
         refreshToken || req.body.refreshToken
 
-        if (incomingRefreshToken) {
+        if (!incomingRefreshToken) {
           throw new ApiError(401,"unauthorized request")
           
         }
+      
          try {
           const decodedToken =jwt.verify(
            incomingRefreshToken,
